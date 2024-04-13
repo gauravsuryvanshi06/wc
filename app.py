@@ -1,5 +1,6 @@
 
 import explore, upload, counting
+from streamlit_option_menu import option_menu
 
 from io import StringIO
 import streamlit as st
@@ -91,7 +92,6 @@ st.button('Rerun')
 
 # import streamlit as st
 
-# from streamlit_option_menu import option_menu
 
 
 # import home, trending, account, your, about
