@@ -3,7 +3,7 @@ import explore, upload, counting
 
 from io import StringIO
 import streamlit as st
-from classixfication import animal_classification
+from classification import animal_classification
 from counting import animal_counting
 
 from upload import uploads
