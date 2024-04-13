@@ -11,7 +11,7 @@ from upload import uploads
 from information import animal_information, robo
 from explore import display_image, explore, viewer
 import pandas as pd
-
+from streamlit_option_menu import option_menu
 import numpy as np
 
 from PIL import Image
@@ -92,6 +92,7 @@ st.button('Rerun')
 
 # import streamlit as st
 
+# from streamlit_option_menu import option_menu
 
 
 # import home, trending, account, your, about

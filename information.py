@@ -128,78 +128,78 @@ def display_text_result(result):
     st.write(result_text)
     return animal_names
 
-def robo():
-    st.title("Image Inference")
-    detected_animals = display_text_result(result)  # This will return the list of animal names
-    for animal in detected_animals:
-      st.markdown(f"### Information for {animal.capitalize()}:")
-      animal_info = fetch_animal_info_from_dataset(animal)
-      if animal_info is not None and not animal_info.empty:
-        st.markdown("**Height:** " + str(animal_info['Height (cm)']))
-        st.markdown("**Weight:** " + str(animal_info['Weight (kg)']))
-        st.markdown("**Color:** " + animal_info['Color'])
-        st.markdown("**Lifespan:** " + str(animal_info['Lifespan (years)']))
+# def robo():
+#     st.title("Image Inference")
+#     detected_animals = display_text_result(result)  # This will return the list of animal names
+#     for animal in detected_animals:
+#       st.markdown(f"### Information for {animal.capitalize()}:")
+#       animal_info = fetch_animal_info_from_dataset(animal)
+#       if animal_info is not None and not animal_info.empty:
+#         st.markdown("**Height:** " + str(animal_info['Height (cm)']))
+#         st.markdown("**Weight:** " + str(animal_info['Weight (kg)']))
+#         st.markdown("**Color:** " + animal_info['Color'])
+#         st.markdown("**Lifespan:** " + str(animal_info['Lifespan (years)']))
         
-        st.write("Diet:", animal_info['Diet'])
-        st.write("Habitat:", animal_info['Habitat'])
-        st.write("Predators:", animal_info['Predators'])
-        st.write("Average Speed (km/h):", str(animal_info['Average Speed (km/h)']))
-        st.write("Countries Found:", animal_info['Countries Found'])
+#         st.write("Diet:", animal_info['Diet'])
+#         st.write("Habitat:", animal_info['Habitat'])
+#         st.write("Predators:", animal_info['Predators'])
+#         st.write("Average Speed (km/h):", str(animal_info['Average Speed (km/h)']))
+#         st.write("Countries Found:", animal_info['Countries Found'])
         
-        st.write("Conservation Status:")
-        display_conservation_status(animal_info['Conservation Status'])
+#         st.write("Conservation Status:")
+#         display_conservation_status(animal_info['Conservation Status'])
         
-        st.write("Family:", animal_info['Family'])
-        st.write("Gestation Period (days):", str(animal_info['Gestation Period (days)']))
-        st.write("Top Speed (km/h):", str(animal_info['Top Speed (km/h)']))
-        st.write("Social Structure:", animal_info['Social Structure'])
-        st.write("Offspring per Birth:", str(animal_info['Offspring per Birth']))
-      else:
-        st.write("No information found for this animal.")
+#         st.write("Family:", animal_info['Family'])
+#         st.write("Gestation Period (days):", str(animal_info['Gestation Period (days)']))
+#         st.write("Top Speed (km/h):", str(animal_info['Top Speed (km/h)']))
+#         st.write("Social Structure:", animal_info['Social Structure'])
+#         st.write("Offspring per Birth:", str(animal_info['Offspring per Birth']))
+#       else:
+#         st.write("No information found for this animal.")
 
-    """
-Discover detailed insights about animals with our enhanced visual presentation feature. Dive into our comprehensive dataset to learn more about your favorite animals, displayed in a visually appealing format.
+#     """
+# Discover detailed insights about animals with our enhanced visual presentation feature. Dive into our comprehensive dataset to learn more about your favorite animals, displayed in a visually appealing format.
 
-"""    
-    if st.checkbox('Show the entire dataset',key='1234'):
-      st.dataframe(animal_data)
-    CLIENT = InferenceHTTPClient(
-        api_url="https://detect.roboflow.com",
-        api_key="coZNWQb0K35yZfbOU3rf"
-    )
+# """    
+#     if st.checkbox('Show the entire dataset',key='1234'):
+#       st.dataframe(animal_data)
+#     CLIENT = InferenceHTTPClient(
+#         api_url="https://detect.roboflow.com",
+#         api_key="coZNWQb0K35yZfbOU3rf"
+#     )
 
-    uploaded_file = st.file_uploader("Choose a file")
+#     uploaded_file = st.file_uploader("Choose a file")
 
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
-        st.markdown("<h3 style='text-align: left; color: black;'>Classifying...</h3>", unsafe_allow_html=True)
+#     if uploaded_file is not None:
+#         st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+#         st.markdown("<h3 style='text-align: left; color: black;'>Classifying...</h3>", unsafe_allow_html=True)
 
-        # Create a progress bar instance
-        progress_bar = st.progress(0)
+#         # Create a progress bar instance
+#         progress_bar = st.progress(0)
 
-        # Time duration for the progress bar to fill
-        duration = 5  # duration in seconds
-        increments = 20  # increase the progress bar in 5% increments
-        percent_complete = st.empty()
+#         # Time duration for the progress bar to fill
+#         duration = 5  # duration in seconds
+#         increments = 20  # increase the progress bar in 5% increments
+#         percent_complete = st.empty()
 
 
-        for i in range(increments + 1):
-            # Update progress bar by increment
+#         for i in range(increments + 1):
+#             # Update progress bar by increment
 
-            progress = int(100 * i / increments)
-            progress_bar.progress(progress)
-            percent_complete.text(f"Progress: {progress}%")
-            # Wait a bit before the next update
-            time.sleep(duration / increments)
+#             progress = int(100 * i / increments)
+#             progress_bar.progress(progress)
+#             percent_complete.text(f"Progress: {progress}%")
+#             # Wait a bit before the next update
+#             time.sleep(duration / increments)
 
-        image_bytes = uploaded_file.read()
+#         image_bytes = uploaded_file.read()
 
-        image_base64 = base64.b64encode(image_bytes).decode("utf-8")
+#         image_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
-        result = CLIENT.infer(image_base64, model_id="animal-detection-jvsw5/1")
+#         result = CLIENT.infer(image_base64, model_id="animal-detection-jvsw5/1")
 
-        st.write("Inference result:")
-        display_text_result(result)
+#         st.write("Inference result:")
+#         display_text_result(result)
 
 
 
@@ -281,13 +281,14 @@ def robo():
     
     CLIENT = InferenceHTTPClient(
         api_url="https://detect.roboflow.com",
-        api_key="coZNWQb0K35yZfbOU3rf"
+        api_key="coZNWQb0K35yZfbOU3rf",
+
     )
 
     uploaded_file = st.file_uploader("Choose a file")
 
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True,key=143)
         st.markdown("<h5 style='text-align: left; color: black;'>Classifying...</h3>", unsafe_allow_html=True)
         
         colors = [
@@ -325,7 +326,65 @@ def robo():
             # Pause briefly
             time.sleep(duration / increments)
 
-        # # Clear the progress bar and text after completion
+       
+            
+        image_bytes = uploaded_file.read()
+        image_base64 = base64.b64encode(image_bytes).decode("utf-8")
+        
+        result = CLIENT.infer(image_base64, model_id="animal-detection-jvsw5/1")
+        # st.write("### Inference result:")
+        
+        detected_animals = display_text_result(result)  # Ensures result is defined before use
+        st.write(detected_animals[0])
+        i=0
+        for index, animal in enumerate(detected_animals):
+            user_input = animal
+            if user_input:
+                matches = animal_data[animal_data['Animal'].str.lower().str.contains(user_input)]['Animal'].unique()
+                
+                if len(matches) > 0:
+                    key = f"animal_select_box_{index}"  # Unique key based on index
+                    selected_animal = st.selectbox("Select an animal:", matches, key=key)
+                info = fetch_animal_info_from_dataset(selected_animal)
+                    
+                if info is not None:
+                    st.markdown("**Height:** " + str(info['Height (cm)']))
+                    st.markdown("**Weight:** " + str(info['Weight (kg)']))
+                    st.markdown("**Color:** " + info['Color'])
+                    st.markdown("**Lifespan:** " + str(info['Lifespan (years)']))
+                    
+                    st.write("Diet:", info['Diet'])
+                    st.write("Habitat:", info['Habitat'])
+                    st.write("Predators:", info['Predators'])
+                    st.write("Average Speed (km/h):", str(info['Average Speed (km/h)']))
+                    st.write("Countries Found:", info['Countries Found'])
+                    
+                    st.write("Conservation Status:")
+                    display_conservation_status(info['Conservation Status'])
+                    
+                    st.write("Family:", info['Family'])
+                    st.write("Gestation Period (days):", str(info['Gestation Period (days)']))
+                    st.write("Top Speed (km/h):", str(info['Top Speed (km/h)']))
+                    st.write("Social Structure:", info['Social Structure'])
+                    st.write("Offspring per Birth:", str(info['Offspring per Birth']))
+                else:
+                    st.write("No information found for this animal.")
+
+           
+    else:
+            st.write("Please upload an image to start the inference process.")
+
+
+# Ensure to call robo() function at the appropriate place in your script
+# robo()
+
+
+
+
+
+
+
+ # # Clear the progress bar and text after completion
         # my_bar.empty()
         # progress_text.empty()
 
@@ -385,80 +444,26 @@ def robo():
             
         #     # Pause briefly
         #     time.sleep(duration / increments)
-            
-        image_bytes = uploaded_file.read()
-        image_base64 = base64.b64encode(image_bytes).decode("utf-8")
-        
-        result = CLIENT.infer(image_base64, model_id="animal-detection-jvsw5/1")
-        # st.write("### Inference result:")
-        
-        detected_animals = display_text_result(result)  # Ensures result is defined before use
-        st.write(detected_animals[0])
-        i=0
-        for index, animal in enumerate(detected_animals):
-            user_input = animal
-            if user_input:
-                matches = animal_data[animal_data['Animal'].str.lower().str.contains(user_input)]['Animal'].unique()
-                
-                if len(matches) > 0:
-                    key = f"animal_select_box_{index}"  # Unique key based on index
-                    selected_animal = st.selectbox("Select an animal:", matches, key=key)
-                info = fetch_animal_info_from_dataset(selected_animal)
-                    
-                if info is not None:
-                    st.markdown("**Height:** " + str(info['Height (cm)']))
-                    st.markdown("**Weight:** " + str(info['Weight (kg)']))
-                    st.markdown("**Color:** " + info['Color'])
-                    st.markdown("**Lifespan:** " + str(info['Lifespan (years)']))
-                    
-                    st.write("Diet:", info['Diet'])
-                    st.write("Habitat:", info['Habitat'])
-                    st.write("Predators:", info['Predators'])
-                    st.write("Average Speed (km/h):", str(info['Average Speed (km/h)']))
-                    st.write("Countries Found:", info['Countries Found'])
-                    
-                    st.write("Conservation Status:")
-                    display_conservation_status(info['Conservation Status'])
-                    
-                    st.write("Family:", info['Family'])
-                    st.write("Gestation Period (days):", str(info['Gestation Period (days)']))
-                    st.write("Top Speed (km/h):", str(info['Top Speed (km/h)']))
-                    st.write("Social Structure:", info['Social Structure'])
-                    st.write("Offspring per Birth:", str(info['Offspring per Birth']))
-                else:
-                    st.write("No information found for this animal.")
 
-            # st.markdown(f"Information for {animal.capitalize()}:")
-            # animal_info = fetch_animal_info_from_dataset(animal)
-            # st.markdown(f"Information for {animal.capitalize()}:")
-            # if animal_info is not None and not animal_info.empty:
-            #         st.markdown("**Height:** " + str(animal_info['Height (cm)']))
-            #         st.markdown("**Weight:** " + str(animal_info['Weight (kg)']))
-            #         st.markdown("**Color:** " + animal_info['Color'])
-            #         st.markdown("**Lifespan:** " + str(animal_info['Lifespan (years)']))
-                    
-            #         st.write("Diet:", animal_info['Diet'])
-            #         st.write("Habitat:", animal_info['Habitat'])
-            #         st.write("Predators:", animal_info['Predators'])
-            #         st.write("Average Speed (km/h):", str(animal_info['Average Speed (km/h)']))
-            #         st.write("Countries Found:", animal_info['Countries Found'])
-                    
-            #         st.write("Conservation Status:")
-            #         display_conservation_status(animal_info['Conservation Status'])
-                    
-            #         st.write("Family:", animal_info['Family'])
-            #         st.write("Gestation Period (days):", str(animal_info['Gestation Period (days)']))
-            #         st.write("Top Speed (km/h):", str(animal_info['Top Speed (km/h)']))
-            #         st.write("Social Structure:", animal_info['Social Structure'])
-            #         st.write("Offspring per Birth:", str(animal_info['Offspring per Birth']))
 
-            # else:
-            #             st.write("No information found for this animal.")
-    else:
-            st.write("Please upload an image to start the inference process.")
 
-# Ensure to call robo() function at the appropriate place in your script
-# robo()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
