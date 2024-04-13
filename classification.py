@@ -74,7 +74,7 @@ import json
 # print(results)
 import streamlit as st
 import streamlit as st
-from inference_sdk import InferenceHTTPClient
+# from inference_sdk import InferenceHTTPClient
 import base64
 
 import base64
