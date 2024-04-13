@@ -16,7 +16,7 @@
 
 
 
-# # from inference_sdk import InferenceHTTPClient
+from inference_sdk import InferenceHTTPClient
 
 # # CLIENT = InferenceHTTPClient(
 # #     api_url="https://detect.roboflow.com",
